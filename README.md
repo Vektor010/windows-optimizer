@@ -1,24 +1,15 @@
-﻿<div align="center">
-
-```
- ██████╗ ██████╗ ████████╗██╗███╗   ███╗██╗███████╗███████╗██████╗ 
-██╔═══██╗██╔══██╗╚══██╔══╝██║████╗ ████║██║╚══███╔╝██╔════╝██╔══██╗
-██║   ██║██████╔╝   ██║   ██║██╔████╔██║██║  ███╔╝ █████╗  ██████╔╝
-██║   ██║██╔═══╝    ██║   ██║██║╚██╔╝██║██║ ███╔╝  ██╔══╝  ██╔══██╗
-╚██████╔╝██║        ██║   ██║██║ ╚═╝ ██║██║███████╗███████╗██║  ██║
- ╚═════╝ ╚═╝        ╚═╝   ╚═╝╚═╝     ╚═╝╚═╝╚══════╝╚══════╝╚═╝  ╚═╝
-```
+<div align="center">
 
 # ⚡ Windows Optimization Suite (v2.1)
 ### Ultimate Low-Latency Gaming & System Optimizer for Windows 11
 
-[![Windows 11](https://img.shields.io/badge/Windows_11-24H2%20%7C%2023H2-0078D4?style=for-the-badge&logo=windows11&logoColor=white)](https://microsoft.com/windows)
-[![PowerShell](https://img.shields.io/badge/PowerShell-5.1%20%7C%207%2B-5391FE?style=for-the-badge&logo=powershell&logoColor=white)](https://github.com/PowerShell/PowerShell)
-[![AMD Zen 4/5](https://img.shields.io/badge/CPU-AMD_Ryzen_3D_V--Cache-ED1C24?style=for-the-badge&logo=amd&logoColor=white)](https://www.amd.com)
-[![NVIDIA RTX](https://img.shields.io/badge/GPU-NVIDIA_GeForce_RTX-76B900?style=for-the-badge&logo=nvidia&logoColor=white)](https://www.nvidia.com)
-[![DPC Latency](https://img.shields.io/badge/DPC_Latency-%3C_50_%C2%B5s_Verified-success?style=for-the-badge)](https://resplendence.com/latencymon)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
-[![QA](https://img.shields.io/badge/QA-PSScriptAnalyzer_Passed-brightgreen?style=for-the-badge)](.github/workflows/lint.yml)
+[![Windows 11](https://img.shields.io/badge/Windows_11-24H2%20%7C%2023H2-0078D4?logo=windows11&logoColor=white)](https://microsoft.com/windows)
+[![PowerShell](https://img.shields.io/badge/PowerShell-5.1%20%7C%207%2B-5391FE?logo=powershell&logoColor=white)](https://github.com/PowerShell/PowerShell)
+[![AMD Zen 4/5](https://img.shields.io/badge/CPU-AMD_Ryzen_3D_V--Cache-ED1C24?logo=amd&logoColor=white)](https://www.amd.com)
+[![NVIDIA RTX](https://img.shields.io/badge/GPU-NVIDIA_GeForce_RTX-76B900?logo=nvidia&logoColor=white)](https://www.nvidia.com)
+[![DPC Latency](https://img.shields.io/badge/DPC_Latency-%3C_50_%C2%B5s-success)](https://resplendence.com/latencymon)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue)](LICENSE)
+[![QA](https://img.shields.io/badge/QA-PSScriptAnalyzer_Passed-brightgreen)](.github/workflows/lint.yml)
 
 <p align="center">
   <b>Комплексный модульный пакет тонкой оптимизации Windows 11 для соревновательного гейминга (Low-Latency & Esports).</b><br>
@@ -26,7 +17,7 @@
   Интерактивное меню на русском языке, нулевой оверхед, полная отвязка RTSS от Afterburner и 100% безопасный откат.
 </p>
 
-[🚀 Быстрый старт](#-быстрый-старт) • [✨ Ключевые особенности](#-ключевые-особенности) • [🖥️ Обзор меню](#-интерактивный-интерфейс-меню) • [📊 Сводные таблицы твиков](#-сводные-таблицы-твиков) • [🛡️ Механизм отката](#-безопасность-и-механизм-отката) • [👤 Автор](#-автор)
+[🚀 Быстрый старт](#-быстрый-старт) &bull; [✨ Ключевые особенности](#-ключевые-особенности) &bull; [🖥️ Обзор меню](#-интерактивный-интерфейс-меню) &bull; [📊 Сводные таблицы твиков](#-сводные-таблицы-твиков) &bull; [🛡️ Механизм отката](#-безопасность-и-механизм-отката) &bull; [👤 Авторы](#-авторы-и-благодарности)
 
 </div>
 
@@ -260,9 +251,10 @@ windows-optimizer/
 
 ---
 
-## 👤 Автор
+## 👤 Авторы и благодарности
 
 - **[Vektor010](https://github.com/Vektor010)** — Архитектура проекта, интерактивное меню, модуль автономного Afterburner, интеграция бейзлайна KernelOS, QA и портирование.
+- **Nohuto** — Фундаментальные технические исследования ядра Windows, реверс-инжиниринг параметров MMCSS, квантов таймеров и киберспортивные утилиты.
 
 ---
 
