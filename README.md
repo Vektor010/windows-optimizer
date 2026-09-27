@@ -1,4 +1,4 @@
-<div align="center">
+﻿<div align="center">
 
 ```
  ██████╗ ██████╗ ████████╗██╗███╗   ███╗██╗███████╗███████╗██████╗ 
@@ -100,97 +100,95 @@ cd windows-optimizer
 
 ## 📊 Сводные таблицы твиков
 
-### 1. Системные твики и ядро (System & Kernel)
+### 1. Ядро и планировщик (System & Kernel)
 
-| Параметр | Путь реестра / Команда | Значение | Описание (что делает) | Влияние на игры |
-|---|---|:---:|---|---|
-| **Performance Log Users** | `net localgroup "Пользователи журналов производительности" <User> /add` | SID S-1-5-32-559 | Добавляет пользователя в системную группу аудита производительности | Позволяет PresentMon, Special K и CapFrameX отслеживать SwapChain без прав Администратора |
-| **SystemResponsiveness** | `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile` | `0` (DWORD) | Регулирует бронирование вычислительной мощности CPU под фоновые задачи | Резервирует 100% мощности процессора активной игре без скрытого 20% лимита |
-| **NetworkThrottlingIndex** | `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile` | `0xFFFFFFFF` (DWORD) | Отключает внутренний лимитер пакетов сетевого стека Windows во время мультимедиа | Сетевая карта обрабатывает максимальное число пакетов без дропов при высокой нагрузке |
-| **MMCSS Tasks\Games** | `HKLM\...\Multimedia\SystemProfile\Tasks\Games` | `GPU Priority=8, Priority=6, Scheduling Category=High` | Задает приоритеты планирования потоков игровых движков | Поток игры получает наивысший приоритет над системными службами |
-| **NoLazyMode** | `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile` | `1` (DWORD) | Запрещает планировщику переходить в спящий (ленивый) режим | Устраняет задержку пробуждения очередей планировщика при смене сцен |
-| **Win32PrioritySeparation** | `HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl` | `38 (0x26)` (DWORD) | Задает кванты времени процессора для активного окна | Короткие переменные кванты 3:1 в пользу активной игры, раскрывая кэш Ryzen 3D V-Cache |
-| **SerializeTimerExpiration** | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel` | `2` (DWORD) | Десериализует таблицы таймеров ядра `KTIMER` | Локальные таблицы таймеров на каждое ядро (PRCB), устраняя перегрузку Core 0 |
-| **ThreadDpcEnable** | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel` | `1` (DWORD) | Переводит обработчики DPC драйверов в прерываемые системные потоки | Предотвращает микрофризы звука и ввода при обращении к NVMe SSD |
-| **AllowAutoGameMode** | `HKCU\Software\Microsoft\GameBar` | `1` (DWORD) | Включает аппаратный Игровой режим Windows | Выделяет приоритетные аппаратные ресурсы GPU и CPU активному окну игры |
-| **AllowGameDVR** | `HKLM\SOFTWARE\Policies\Microsoft\Windows\GameDVR` | `0` (DWORD) | Отключает фоновый рекордер Xbox Game DVR | Исключает фоновое кодирование видео и нагрузку на видеопамять GPU |
-| **Memory Compression** | `Disable-MMAgent -MemoryCompression -PageCombining` | Команда | Отключает алгоритм компрессии страниц оперативной памяти | Экономит такты CPU на распаковку ОЗУ (на игровых ПК с 32-64 ГБ сжатие вредно) |
-| **DisablePagingExecutive** | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management` | `1` (DWORD) | Запрещает выгрузку компонентов ядра и драйверов в pagefile | Драйверы видеокарты, звука и ядро ntoskrnl всегда заблокированы в быстрой памяти RAM |
-| **DWM FSO DirectFlip** | `HKCU\System\GameConfigStore\GameDVR_FSEBehaviorMode` | `2` (DWORD) | Настраивает композитор DWM на независимый Independent Flip | Обеспечивает задержки Exclusive Fullscreen в оконном режиме без рамок (Borderless) |
-| **DWM Multi-Plane Overlay** | `HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\DisableOverlays` | `0` (DWORD) | Разрешает аппаратные плоскости оверлея GPU (MPO) | Кадры игры выводятся на монитор видеокартой напрямую в обход очередей DWM |
-| **HwSchMode (HAGS)** | `HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers` | `2` (DWORD) | Активирует Hardware-Accelerated GPU Scheduling | Передает планирование видеопамяти аппаратному процессору GPU, снижая Input Lag |
-| **ForegroundPriorityBoost** | `HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\Scheduler` | `1` (DWORD) | Повышает приоритет рендеринга активного окна в диспетчере GPU | Гарантирует максимальный фреймрейт при наличии окон на втором мониторе |
-| **NTFS 8.3 & LastAccess** | `HKLM\SYSTEM\CurrentControlSet\Control\FileSystem` | `NtfsDisable8dot3NameCreation=1, NtfsDisableLastAccessUpdate=1` | Отключает генерацию DOS-имен 8.3 и обновление времени последнего доступа | Ускоряет файловые операции чтения/записи на NVMe SSD за счет сокращения метаданных |
+| Твик / Параметр | Значение | Эффект для Low-Latency |
+| :--- | :---: | :--- |
+| **Win32PrioritySeparation** | `0x26 (38)` | Кванты 3:1 в пользу игры, удержание потоков в L3 3D V-Cache |
+| **SerializeTimerExpiration** | `2` | Десериализация KTIMER по ядрам PRCB, разгрузка Core 0 |
+| **ThreadDpcEnable** | `1` | DPC-обработчики в потоках ядра, исключение фризов аудио и NVMe |
+| **SystemResponsiveness** | `0` | 100% мощности процессора игре (снятие 20% резерва) |
+| **NetworkThrottlingIndex** | `0xFFFFFFFF` | Отключение лимитера пакетов сетевого стека при мультимедиа |
+| **MMCSS Tasks\Games** | `High / 8` | Наивысший приоритет игровых потоков над фоновыми службами |
+| **NoLazyMode** | `1` | Запрет засыпания очередей планировщика при смене сцен |
+| **DWM FSO DirectFlip** | `2` | Задержка честного Exclusive Fullscreen в Borderless |
+| **DWM MPO Overlays** | `0 (Enabled)`| Прямой аппаратный вывод кадров GPU в обход композитора DWM |
+| **HwSchMode (HAGS)** | `2` | Аппаратное планирование GPU, прямое снижение Input Lag |
+| **ForegroundPriorityBoost** | `1` | Приоритет рендера активного окна при втором мониторе |
+| **Memory Compression** | `Off` | Отключение сжатия ОЗУ, экономия тактов CPU на 32-64 ГБ RAM |
+| **DisablePagingExecutive** | `1` | Ядро и драйверы заблокированы в быстрой памяти RAM |
+| **NTFS LastAccess / 8.3** | `Disabled` | Отключение лишних метаданных NTFS, разгрузка очереди NVMe |
+| **AutoGameMode / GameDVR** | `1 / 0` | Аппаратный игровой режим ВКЛ, фоновый оверлей ВЫКЛ |
 
 ---
 
 ### 2. Сетевой стек и TCP/IP (Network)
 
-| Параметр | Путь / Команда | Значение | Описание (что делает) | Влияние на игры |
-|---|---|:---:|---|---|
-| **TCP Auto-Tuning** | `netsh int tcp set global autotuninglevel=normal` | `Normal` | Включает алгоритм динамической оптимизации окна приема TCP | Обеспечивает максимальную пропускную способность интернет-канала |
-| **TCP Heuristics** | `netsh int tcp set global heuristics=disabled` | `Disabled` | Отключает встроенную эвристику масштабирования Windows | Предотвращает необоснованное урезание сетевого окна при перегрузках |
-| **Congestion Provider** | `Set-NetTCPSetting -CongestionProvider CTCP` | `CTCP` | Устанавливает алгоритм управления перегрузкой с контролем RTT | Минимизирует буферблоат (Bufferbloat) и удерживает стабильный пинг |
-| **Interrupt Moderation** | `Set-NetAdapterAdvancedProperty -DisplayName "Interrupt Moderation"` | `Disabled` | Отключает задержку накопления пакетов в сетевом адаптере | Процессор получает сетевые пакеты мгновенно по мере поступления без группировки |
-| **Receive / Transmit Buffers**| `Set-NetAdapterAdvancedProperty -DisplayName "Receive Buffers"` | `1024 / 512` | Увеличивает аппаратные кольцевые буферы сетевой карты | Полностью исключает сброс пакетов (Packet Loss) во время пикового трафика |
-| **Flow Control** | `Set-NetAdapterAdvancedProperty -DisplayName "Flow Control"` | `Disabled` | Отключает генерацию и прием кадров паузы (Pause Frames) | Устраняет искусственные микропаузы в передаче пакетов |
-| **Energy Efficient Ethernet**| `Set-NetAdapterAdvancedProperty -DisplayName "Energy Efficient Ethernet"` | `Disabled` | Запрещает сетевому чипу уходить в режим энергосбережения | Исключает задержку пробуждения контроллера физического уровня (PHY) между пакетами |
-| **Large Send Offload (LSO)** | `Set-NetAdapterAdvancedProperty -DisplayName "Large Send Offload v2*"` | `Disabled` | Отключает аппаратную сегментацию пакетов сетевой картой | Исключает статтеры сетевого стека, передавая фрагментацию процессору |
-| **Алгоритм Нагла** | `HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces` | `TcpAckFrequency=1, TCPNoDelay=1, TcpDelAckTicks=0` | Заставляет стек подтверждать получение каждого пакета мгновенно | Кардинально уменьшает задержку передачи сетевых координат и тикрейта в CS2/Valorant |
+| Твик / Параметр | Значение | Эффект для Low-Latency |
+| :--- | :---: | :--- |
+| **Алгоритм Нагла** | `AckFreq=1, NoDelay=1` | Мгновенная отправка пакетов без задержки, тикрейт в CS2 |
+| **Ring Buffers (RX/TX)** | `1024 / 512` | Увеличенные буферы сетевой карты, 0% Packet Loss в пиках |
+| **Interrupt Moderation** | `Disabled` | Пакеты передаются CPU сразу без ожидания накопления |
+| **Energy Efficient Ethernet**| `Disabled` | Сетевой чип всегда активен без засыпания уровня PHY |
+| **Flow Control** | `Disabled` | Отключение Pause Frames, устранение искусственных микропауз |
+| **Large Send Offload (LSO)**| `Disabled` | Исключение статтеров фрагментации пакетов на сетевом чипе |
+| **Congestion Provider** | `CTCP` | Алгоритм Compound TCP с контролем RTT против Bufferbloat |
+| **TCP Auto-Tuning** | `Normal` | Максимальная пропускная способность интернет-канала |
+| **TCP Heuristics** | `Disabled` | Запрет урезания размера окна при временных нагрузках |
 
 ---
 
 ### 3. Видеокарта, NVIDIA и MSI Afterburner (GPU)
 
-| Параметр | Источник / Служба | Значение | Описание (что делает) | Влияние на игры |
-|---|---|:---:|---|---|
-| **GPU MSI Mode** | `HKLM\SYSTEM\CurrentControlSet\Enum\PCI\...\Interrupt Management` | `MSISupported=1` (DWORD) | Переводит видеокарту в современный режим Message Signaled Interrupts | Исключает конфликты линий прерываний (IRQ Sharing) с другими устройствами PCIe |
-| **DevicePriority High** | `HKLM\SYSTEM\CurrentControlSet\Enum\PCI\...\Affinity Policy` | `DevicePriority=3` (DWORD) | Назначает видеокарте наивысший приоритет обработки прерываний шины | Сокращает задержку передачи сигналов рендеринга между видеокартой и процессором |
-| **NvTelemetryContainer** | Служба `NvTelemetryContainer` | `Disabled` | Отключает фоновую службу телеметрии графического драйвера NVIDIA | Устраняет скрытую отправку данных и периодические скачки нагрузки на процессор |
-| **TDR Delay** | `HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers` | `TdrDelay=8, TdrDdiDelay=8` (DWORD) | Увеличивает допустимое время отклика GPU до 8 секунд (по умолчанию 2 сек) | Защищает от крашей с ошибкой `DXGI_ERROR_DEVICE_REMOVED` при тяжелой компиляции шейдеров |
-| **MSI Afterburner Tray Mode (No RTSS)** | Планировщик Windows: `MSIAfterburner` (`scripts/MSI-Afterburner-Profile.ps1`) | `MSIAfterburner.exe /s`, `EnableServer=0` | Автозагрузка в трей для управления кулерами и OC/UV с **полной изоляцией RTSS** | Активирует кастомную кривую кулеров (`SwAutoFanControl`), сохраняя 0 процессов RTSS и 0 оверхеда |
-| **On-Demand NVCPL** | Ярлык запуска [`scripts/nvcpl.ps1`](scripts/nvcpl.ps1) | По требованию | Запускает службу `NVDisplay.Container` только на время открытия Панели NVIDIA | Быстрый запуск Панели управления с автовыгрузкой службы после закрытия |
+| Твик / Параметр | Значение | Эффект для Low-Latency |
+| :--- | :---: | :--- |
+| **GPU MSI Mode** | `1 (MSI)` | Исключение конфликтов IRQ Sharing на шине PCI Express |
+| **DevicePriority** | `3 (High)` | Наивысший аппаратный приоритет прерываний видеокарты |
+| **TDR Delay** | `8 сек` | Защита от крашей `DXGI_DEVICE_REMOVED` при компиляции шейдеров |
+| **NvTelemetryContainer** | `Disabled` | Полное отключение фоновой телеметрии драйвера NVIDIA |
+| **Afterburner (No RTSS)** | `В трее (/s)` | Кастомная кривая кулеров (`SwAutoFanControl=1`), 0 хуков RTSS |
+| **On-Demand NVCPL** | `По требованию`| Панель NVIDIA без постоянной фоновой службы `NVDisplay` |
 
 ---
 
-### 4. Электропитание, таймеры и периферия
+### 4. Электропитание, таймеры и мышь (Input & Power)
 
-| Параметр | Путь реестра / Команда | Значение | Описание | Влияние на игры |
-|---|---|:---:|---|---|
-| **CoalescingTimerInterval** | `HKLM\SYSTEM\CurrentControlSet\Control\Power` | `0` (DWORD) | Отключает коалесценцию (группировку) системных таймеров | Прерывания таймера срабатывают строго вовремя, выравнивая стабильность фреймтайма |
-| **EnergyEstimationDisabled**| `HKLM\SYSTEM\CurrentControlSet\Control\Power` | `1` (DWORD) | Отключает аудит энергопотребления Energy Estimation | Устраняет непрерывный фоновый опрос датчиков потребления питания материнской платы |
-| **USB Audio Idle Detection**| Реестр аудио-устройств `Class\{4d36e96c...}\PowerSettings` | `0, 0, 0, 0` (Binary) | Отключает засыпание USB-аудио (`ConservationIdleTime`, `CS*` в 24H2) | Устраняет щелчки, проглатывание первого звука и задержку старта внешних USB-ЦАП |
-| **System Hibernation** | `powercfg -h off` | Команда | Полностью отключает режим гибернации и удаляет `hiberfil.sys` | Освобождает 32-64 ГБ на скоростном NVMe SSD и гарантирует чистый запуск ядра |
-| **RawMouseThrottle** | `HKCU\Control Panel\Mouse` | `RawMouseThrottleEnabled=0` | Отключает системный троттлинг прямого ввода мыши (Raw Input) | Стабильная передача отчетов мыши с частотой 1000-8000 Гц без троттлинга |
-| **Mouse Acceleration** | `HKCU\Control Panel\Mouse` | `MouseSpeed="0", MouseThreshold=0` | Полностью отключает программную акселерацию мыши Windows | Курсор перемещается строго 1:1 в соответствии с движением руки |
-| **Audio Ducking** | `HKCU\Software\Microsoft\Multimedia\Audio` | `UserDuckingPreference=3` (DWORD) | Отключает автоматическое приглушение звука при вызове | Discord и звонки больше не снижают громкость шагов в игре (0 dB затухания) |
+| Твик / Параметр | Значение | Эффект для Low-Latency |
+| :--- | :---: | :--- |
+| **CoalescingTimerInterval** | `0` | Отключение группировки таймеров, стабильный фреймтайм |
+| **EnergyEstimationDisabled**| `1` | Отключение циклического фонового опроса датчиков платы |
+| **USB Audio Idle Detection**| `0 (Disabled)` | Устранение щелчков, задержек и засыпания внешних USB-ЦАП |
+| **System Hibernation** | `Off` | Чистый запуск ядра, освобождение 32-64 ГБ на NVMe SSD |
+| **RawMouseThrottle** | `0` | Честный опрос мыши 1000-8000 Гц без троттлинга Windows |
+| **Mouse Acceleration** | `0 (1:1)` | Полное отключение программной акселерации курсора |
+| **Audio Ducking** | `3 (0 dB)` | Голосовой чат (Discord) не приглушает звуки игры |
 
 ---
 
 ### 5. Безопасность, приватность и службы
 
-| Параметр / Служба | Путь / Служба | Значение | Описание | Влияние на систему и игры |
-|---|---|:---:|---|---|
-| **VBS / HVCI** | `HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard` | `EnableVBS=0, HypervisorEnforcedCodeIntegrity=0` | Полностью отключает уровень изоляции безопасности ядра Hyper-V | **Прирост 3-8% к минимальному FPS (0.1% и 1% Low)** |
-| **Блокировка WPBT** | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager` | `DisableWpbtExecution=1` (DWORD) | Запрещает исполнение бинарников из ACPI-таблицы BIOS платы | Блокирует фоновую установку OEM-софта вендора (Armoury Crate, Dragon Center) |
-| **AllowTelemetry & DiagTrack**| Политики DataCollection + служба `DiagTrack` | `0` (DWORD), служба `Disabled` | Отключает службу сбора телеметрии Connected User Experiences | Снимает циклическую нагрузку на процессор и диск |
-| **Windows Error Reporting** | Служба `WerSvc` и `WerFault.exe` | `Disabled` | Отключает службу отчетов об ошибках | При сбое игры процесс завершается мгновенно (0 сек) без зависания системы |
-| **SysMain (SuperFetch)** | Служба `SysMain` | `Disabled` | Отключает упреждающее чтение и кэширование программ на SSD | Исключает спонтанные всплески чтения на NVMe SSD во время матча |
-| **Windows Search (WSearch)** | Служба `WSearch` | `Disabled` | Отключает постоянную фоновую индексацию файлов на дисках | Обеспечивает нулевую активность дисковой очереди ввода-вывода |
-| **Windows Copilot & Recall** | Реестр `WindowsCopilot` и `WindowsAI` | `TurnOffWindowsCopilot=1, DisableAIDataAnalysis=1` | Блокирует ИИ-помощника Copilot и фоновый снимок экранов Recall в 24H2 | Исключает фоновый перехват кадров и фоновый анализ активности |
-| **Background Apps (UWP)** | `HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy` | `LetAppsRunInBackground=2` (DWORD) | Глобально запрещает UWP-приложениям работать в фоновом режиме | Фоновые UWP-приложения не потребляют такты CPU во время игры |
+| Параметр / Служба | Значение | Эффект для Low-Latency |
+| :--- | :---: | :--- |
+| **VBS / HVCI** | `Disabled` | **+3-8% к 0.1% и 1% Low FPS**, ликвидация оверхеда Hyper-V |
+| **Блокировка WPBT** | `1 (Blocked)` | Запрет запуска OEM-софта вендора из ACPI-таблицы BIOS |
+| **Telemetry & DiagTrack** | `Disabled` | Прекращение отправки фоновых пакетов и циклов CPU |
+| **Windows Error Reporting** | `Disabled` | Мгновенное завершение сбойных процессов без зависания |
+| **SysMain & WSearch** | `Disabled` | 0 фоновой индексации и сбросов кэша на скоростном SSD |
+| **Copilot & Recall** | `Disabled` | Блокировка ИИ-снимков экранов и фонового захвата кадров |
+| **Background Apps (UWP)** | `2 (Denied)` | Запрет фоновой работы магазинных приложений во время игры |
 
 ---
 
 ### 6. Прикладные программы и киберспортивные утилиты
 
-- **Steam CEF Killer (`umpdc.dll`):** Автоматически выгружает фоновые процессы веб-рендеринга `steamwebhelper.exe` во время запущенной игры, освобождая до 1 ГБ оперативной памяти.
-- **Discord Tweaks:** Отключение аппаратного ускорения Chromium, отладочного логирования и фоновых телеметрических сокетов.
-- **SteelSeries Sonar Killer:** Отключение виртуального аудиодрайвера Sonar, ликвидирующее задержку 20 мс и скачки DPC latency.
-- **Специализированные игровые твикеры:**
-  - `NV-CS2-Tool.ps1` — тонкая настройка CS2, субтикового буфера и переменных драйвера.
-  - `NV-VALORANT-Tool.ps1` — оптимизация конвейера рендеринга для Valorant.
-  - `NV-Fortnite-Tool.ps1`, `NV-Marvel-Tool.ps1`, `NV-OW-Tool.ps1` — специализированные игровые профили.
+| Приложение / Утилита | Метод / Значение | Эффект для Low-Latency |
+| :--- | :---: | :--- |
+| **Steam CEF Killer** | `umpdc.dll` | Автовыгрузка `steamwebhelper.exe` в игре, -1 ГБ ОЗУ |
+| **Discord Tweaks** | Без ускорения GPU | Стабильные частоты видеокарты во время звонков и стрима |
+| **SteelSeries Sonar** | Службы `Disabled` | Устранение задержки звука 20 мс и всплесков DPC latency |
+| **NV-CS2-Tool** | `scripts/` | Тонкая настройка субтикового буфера и сетевых кваров CS2 |
+| **NV-VALORANT-Tool** | `scripts/` | Оптимизация конвейера рендеринга для Valorant |
+| **Shader & DNS Flush** | `scripts/` | Очистка кэшей шейдеров DirectX/NV и DNS после апдейтов |
 
 ---
 
