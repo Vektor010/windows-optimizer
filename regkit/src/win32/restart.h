@@ -1,0 +1,37 @@
+// Copyright (C) 2026 nohuto
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+#pragma once
+
+#include "win32/windows_config.h"
+
+#include <windows.h>
+
+#include <string>
+#include <vector>
+
+namespace regkit::win32
+{
+
+inline constexpr wchar_t kRestartSystemArg[] = L"--restart-system";
+inline constexpr wchar_t kRestartTiArg[] = L"--restart-ti";
+inline constexpr wchar_t kRestartParentArg[] = L"--restart-from-pid";
+inline constexpr wchar_t kRestartUserArg[] = L"--restart-user";
+inline constexpr wchar_t kRestartAdminArg[] = L"--restart-admin";
+inline constexpr wchar_t kRestartDataDirArg[] = L"--data-dir";
+inline constexpr wchar_t kRestartSessionArg[] = L"--restore-session";
+
+bool ArgTakesValue(const std::wstring& arg);
+std::wstring RestartDataDir(const std::vector<std::wstring>& args);
+bool RestoreSessionRequested();
+
+std::wstring RestartArguments(const wchar_t* target_arg, DWORD parent_pid, bool restore_session = true);
+std::wstring RestartArguments(const wchar_t* target_arg, DWORD parent_pid, const std::vector<std::wstring>& original_args);
+
+HRESULT LaunchElevated(HWND owner, const std::wstring& exe, const std::wstring& arguments);
+
+DWORD RestartParentPid(const std::vector<std::wstring>& args);
+
+void WaitForParentExit(DWORD parent_pid);
+
+} // namespace regkit::win32

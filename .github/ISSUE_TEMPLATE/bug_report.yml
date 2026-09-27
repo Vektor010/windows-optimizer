@@ -1,0 +1,56 @@
+name: "🐛 Bug Report / Проблема"
+description: "Сообщить об ошибке или некорректном поведении твика"
+title: "[BUG]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Спасибо, что помогаете улучшить **Noverse Optimization Suite**!
+  - type: input
+    id: system_info
+    attributes:
+      label: "Характеристики системы (Hardware & OS)"
+      description: "Укажите вашу версию Windows, процессор, видеокарту и накопитель."
+      placeholder: "Windows 11 24H2 IoT LTSC, AMD Ryzen 7 9800X3D, NVIDIA RTX 5080, 32GB DDR5"
+    validations:
+      required: true
+  - type: dropdown
+    id: module
+    attributes:
+      label: "Затронутый модуль / скрипт"
+      description: "Какой раздел или скрипт вызвал сбой?"
+      options:
+        - "Главное меню (Optimizer.ps1 / Optimizer.bat)"
+        - "[1] Ядро и система (System-Tweaks.ps1)"
+        - "[2] Сеть и TCP/IP (Network-Tweaks.ps1)"
+        - "[3] Электропитание и таймеры"
+        - "[4] Периферия, мышь и звук"
+        - "[5] NVIDIA, MSI Mode и MSI Afterburner"
+        - "[6] Прикладные программы и игры (Steam, Discord, Sonar)"
+        - "[7] Приватность и телеметрия"
+        - "[8] Безопасность и VBS"
+        - "[9] Интерфейс и Проводник"
+        - "[0] Очистка кэшей и дисков"
+        - "Механизм отката (Backup/Restore)"
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: "Описание проблемы"
+      description: "Что именно пошло не так? Приложите точный текст ошибки консоли."
+      placeholder: "При переключении пункта [X] в консоли появляется ошибка..."
+    validations:
+      required: true
+  - type: textarea
+    id: steps_to_reproduce
+    attributes:
+      label: "Шаги для воспроизведения"
+      description: "Как повторить ошибку?"
+      placeholder: |
+        1. Запустил Optimizer.bat от Администратора
+        2. Выбрал меню [X]
+        3. Нажал [Y]
+    validations:
+      required: true

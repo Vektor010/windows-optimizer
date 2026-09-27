@@ -1,0 +1,41 @@
+# ==============================================================================
+# Git Ignore - Noverse Optimization Suite
+# ==============================================================================
+
+# Benchmark data and logs (PresentMon frame dumps, etc.)
+*.csv
+PresentMon-*.exe
+PresentMon-*.csv
+
+# Video media and large binary recordings
+*.mp4
+*.mkv
+*.avi
+network/assets/blocklist-mgr/*.mp4
+
+# Heavy raw Windows registry hives (250MB+) from reference docs
+regkit/assets/defaults/
+regkit/assets/records/
+
+# Cloned reference repositories (tracked separately)
+noverse-github/
+
+# Backup snapshots and large historical archives (keep baseline .reg and json)
+backup/pre_review_audit_backup_*/
+backup/project_backup_*/
+backup/snapshots/
+backup/*.zip
+
+# IDE, Editors & System
+.vscode/
+.idea/
+*.swp
+*.bak
+*~
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Local agent metadata
+.agents/
+.gemini/

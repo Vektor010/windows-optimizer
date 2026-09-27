@@ -1,0 +1,43 @@
+﻿{
+    "Name":  "ScheduledDefrag",
+    "Path":  "\\Microsoft\\Windows\\Defrag\\",
+    "State":  "Disabled",
+    "Description":  "This task optimizes local storage drives.",
+    "Author":  "$(@%systemroot%\\system32\\defragsvc.dll,-801)",
+    "URI":  "\\Microsoft\\Windows\\Defrag\\ScheduledDefrag",
+    "RegistrationInfo":  {
+                             "SecurityDescriptor":  "D:AI(A;;FA;;;BA)(A;;FA;;;SY)(A;;FRFX;;;LS)(A;;FR;;;AU)",
+                             "Source":  "$(@%systemroot%\\system32\\defragsvc.dll,-800)",
+                             "Author":  "$(@%systemroot%\\system32\\defragsvc.dll,-801)",
+                             "URI":  "\\Microsoft\\Windows\\Defrag\\ScheduledDefrag"
+                         },
+    "Principals":  {
+                       "RunLevel":  "HighestAvailable",
+                       "UserId":  "S-1-5-18",
+                       "Id":  "LocalSystem"
+                   },
+    "Settings":  {
+                     "StartWhenAvailable":  "true",
+                     "MultipleInstancesPolicy":  "IgnoreNew",
+                     "Enabled":  "false",
+                     "MaintenanceSettings":  {
+                                                 "Deadline":  "P1M",
+                                                 "Period":  "P1D"
+                                             },
+                     "UseUnifiedSchedulingEngine":  "true",
+                     "StopIfGoingOnBatteries":  "true",
+                     "IdleSettings":  {
+                                          "StopOnIdleEnd":  "true",
+                                          "RestartOnIdle":  "false"
+                                      },
+                     "DisallowStartIfOnBatteries":  "true"
+                 },
+    "Triggers":  {
+
+                 },
+    "Actions":  {
+                    "Command":  "%windir%\\system32\\defrag.exe",
+                    "Arguments":  "-c -h -o -$",
+                    "Type":  "Exec"
+                }
+}
