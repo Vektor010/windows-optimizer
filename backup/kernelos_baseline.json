@@ -1,0 +1,553 @@
+﻿{
+    "timestamp":  "2026-09-25T19:58:33.3962917+05:00",
+    "computerName":  "KERNELOS-PC",
+    "osCaption":  "Microsoft Windows 11 IoT Enterprise LTSC",
+    "osBuild":  "26200",
+    "stats":  {
+                  "total":  77,
+                  "exists":  66,
+                  "valueNotExists":  10,
+                  "notExists":  1
+              },
+    "tweaks":  [
+                   {
+                       "path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl",
+                       "name":  "Win32PrioritySeparation",
+                       "originalState":  "EXISTS",
+                       "originalValue":  38,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
+                       "name":  "SystemResponsiveness",
+                       "originalState":  "EXISTS",
+                       "originalValue":  10,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
+                       "name":  "NetworkThrottlingIndex",
+                       "originalState":  "EXISTS",
+                       "originalValue":  4294967295,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
+                       "name":  "NoLazyMode",
+                       "originalState":  "EXISTS",
+                       "originalValue":  1,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+                       "name":  "Affinity",
+                       "originalState":  "EXISTS",
+                       "originalValue":  0,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+                       "name":  "Background Only",
+                       "originalState":  "EXISTS",
+                       "originalValue":  "False",
+                       "originalType":  "String"
+                   },
+                   {
+                       "path":  "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+                       "name":  "Clock Rate",
+                       "originalState":  "EXISTS",
+                       "originalValue":  10000,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+                       "name":  "GPU Priority",
+                       "originalState":  "EXISTS",
+                       "originalValue":  8,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+                       "name":  "Priority",
+                       "originalState":  "EXISTS",
+                       "originalValue":  6,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+                       "name":  "Scheduling Category",
+                       "originalState":  "EXISTS",
+                       "originalValue":  "High",
+                       "originalType":  "String"
+                   },
+                   {
+                       "path":  "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+                       "name":  "SFIO Priority",
+                       "originalState":  "EXISTS",
+                       "originalValue":  "High",
+                       "originalType":  "String"
+                   },
+                   {
+                       "path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+                       "name":  "SerializeTimerExpiration",
+                       "originalState":  "EXISTS",
+                       "originalValue":  2,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+                       "name":  "ThreadDpcEnable",
+                       "originalState":  "EXISTS",
+                       "originalValue":  1,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKCU:\\Software\\Microsoft\\GameBar",
+                       "name":  "AllowAutoGameMode",
+                       "originalState":  "EXISTS",
+                       "originalValue":  1,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKCU:\\Software\\Microsoft\\GameBar",
+                       "name":  "AutoGameModeEnabled",
+                       "originalState":  "EXISTS",
+                       "originalValue":  1,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\GameDVR",
+                       "name":  "AllowGameDVR",
+                       "originalState":  "EXISTS",
+                       "originalValue":  0,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\GameDVR",
+                       "name":  "AppCaptureEnabled",
+                       "originalState":  "EXISTS",
+                       "originalValue":  0,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKCU:\\System\\GameConfigStore",
+                       "name":  "GameDVR_Enabled",
+                       "originalState":  "EXISTS",
+                       "originalValue":  0,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKCU:\\System\\GameConfigStore",
+                       "name":  "GameDVR_FSEBehaviorMode",
+                       "originalState":  "EXISTS",
+                       "originalValue":  2,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKCU:\\System\\GameConfigStore",
+                       "name":  "GameDVR_HonorUserFSEBehaviorMode",
+                       "originalState":  "EXISTS",
+                       "originalValue":  1,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKCU:\\System\\GameConfigStore",
+                       "name":  "GameDVR_DXGIHonorFSEWindowsCompatible",
+                       "originalState":  "EXISTS",
+                       "originalValue":  1,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+                       "name":  "DisablePagingExecutive",
+                       "originalState":  "EXISTS",
+                       "originalValue":  1,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+                       "name":  "SleepStudyDisabled",
+                       "originalState":  "EXISTS",
+                       "originalValue":  1,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                       "name":  "CoalescingTimerInterval",
+                       "originalState":  "VALUE_NOT_EXISTS",
+                       "originalValue":  null,
+                       "originalType":  null
+                   },
+                   {
+                       "path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                       "name":  "EnergyEstimationDisabled",
+                       "originalState":  "VALUE_NOT_EXISTS",
+                       "originalValue":  null,
+                       "originalType":  null
+                   },
+                   {
+                       "path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerThrottling",
+                       "name":  "PowerThrottlingOff",
+                       "originalState":  "EXISTS",
+                       "originalValue":  1,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+                       "name":  "DisableOverlays",
+                       "originalState":  "EXISTS",
+                       "originalValue":  0,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+                       "name":  "ForceDirectFlip",
+                       "originalState":  "EXISTS",
+                       "originalValue":  1,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+                       "name":  "HwSchMode",
+                       "originalState":  "EXISTS",
+                       "originalValue":  2,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+                       "name":  "TdrDelay",
+                       "originalState":  "EXISTS",
+                       "originalValue":  10,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+                       "name":  "TdrDdiDelay",
+                       "originalState":  "VALUE_NOT_EXISTS",
+                       "originalValue":  null,
+                       "originalType":  null
+                   },
+                   {
+                       "path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers\\Scheduler",
+                       "name":  "ForegroundPriorityBoost",
+                       "originalState":  "EXISTS",
+                       "originalValue":  1,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKCU:\\Software\\Microsoft\\Windows\\DWM",
+                       "name":  "DisallowAnimations",
+                       "originalState":  "VALUE_NOT_EXISTS",
+                       "originalValue":  null,
+                       "originalType":  null
+                   },
+                   {
+                       "path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+                       "name":  "NtfsDisable8dot3NameCreation",
+                       "originalState":  "EXISTS",
+                       "originalValue":  1,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+                       "name":  "NtfsDisableLastAccessUpdate",
+                       "originalState":  "EXISTS",
+                       "originalValue":  1,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+                       "name":  "LongPathsEnabled",
+                       "originalState":  "EXISTS",
+                       "originalValue":  1,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKCU:\\Control Panel\\Desktop",
+                       "name":  "HungAppTimeout",
+                       "originalState":  "EXISTS",
+                       "originalValue":  "1000",
+                       "originalType":  "String"
+                   },
+                   {
+                       "path":  "HKCU:\\Control Panel\\Desktop",
+                       "name":  "WaitToKillAppTimeout",
+                       "originalState":  "EXISTS",
+                       "originalValue":  "2000",
+                       "originalType":  "String"
+                   },
+                   {
+                       "path":  "HKCU:\\Control Panel\\Desktop",
+                       "name":  "AutoEndTasks",
+                       "originalState":  "EXISTS",
+                       "originalValue":  "1",
+                       "originalType":  "String"
+                   },
+                   {
+                       "path":  "HKCU:\\Control Panel\\Desktop",
+                       "name":  "MouseHoverTime",
+                       "originalState":  "VALUE_NOT_EXISTS",
+                       "originalValue":  null,
+                       "originalType":  null
+                   },
+                   {
+                       "path":  "HKCU:\\Control Panel\\Desktop",
+                       "name":  "MenuShowDelay",
+                       "originalState":  "EXISTS",
+                       "originalValue":  "0",
+                       "originalType":  "String"
+                   },
+                   {
+                       "path":  "HKCU:\\Control Panel\\Accessibility\\StickyKeys",
+                       "name":  "Flags",
+                       "originalState":  "EXISTS",
+                       "originalValue":  "506",
+                       "originalType":  "String"
+                   },
+                   {
+                       "path":  "HKCU:\\Control Panel\\Accessibility\\Keyboard Response",
+                       "name":  "Flags",
+                       "originalState":  "EXISTS",
+                       "originalValue":  "122",
+                       "originalType":  "String"
+                   },
+                   {
+                       "path":  "HKCU:\\Control Panel\\Accessibility\\ToggleKeys",
+                       "name":  "Flags",
+                       "originalState":  "EXISTS",
+                       "originalValue":  "58",
+                       "originalType":  "String"
+                   },
+                   {
+                       "path":  "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                       "name":  "VerboseStatus",
+                       "originalState":  "EXISTS",
+                       "originalValue":  1,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\PushNotifications",
+                       "name":  "ToastEnabled",
+                       "originalState":  "EXISTS",
+                       "originalValue":  0,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\PushNotifications",
+                       "name":  "LockScreenToastEnabled",
+                       "originalState":  "EXISTS",
+                       "originalValue":  0,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Notifications\\Settings",
+                       "name":  "NOC_GLOBAL_SETTING_ALLOW_NOTIFICATION_SOUND",
+                       "originalState":  "EXISTS",
+                       "originalValue":  0,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Notifications\\Settings",
+                       "name":  "NOC_GLOBAL_SETTING_ALLOW_TOASTS_ABOVE_LOCK",
+                       "originalState":  "EXISTS",
+                       "originalValue":  0,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                       "name":  "SnapAssist",
+                       "originalState":  "EXISTS",
+                       "originalValue":  0,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                       "name":  "EnableSnapBar",
+                       "originalState":  "EXISTS",
+                       "originalValue":  0,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                       "name":  "EnableSnapAssistFlyout",
+                       "originalState":  "EXISTS",
+                       "originalValue":  0,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                       "name":  "EnableTaskGroups",
+                       "originalState":  "EXISTS",
+                       "originalValue":  0,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                       "name":  "HideFileExt",
+                       "originalState":  "EXISTS",
+                       "originalValue":  0,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                       "name":  "Hidden",
+                       "originalState":  "EXISTS",
+                       "originalValue":  2,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                       "name":  "ShowSecondsInSystemClock",
+                       "originalState":  "VALUE_NOT_EXISTS",
+                       "originalValue":  null,
+                       "originalType":  null
+                   },
+                   {
+                       "path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                       "name":  "LaunchTo",
+                       "originalState":  "EXISTS",
+                       "originalValue":  1,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                       "name":  "UseCompactMode",
+                       "originalState":  "EXISTS",
+                       "originalValue":  1,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                       "name":  "ShowTypeOverlay",
+                       "originalState":  "EXISTS",
+                       "originalValue":  1,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                       "name":  "FolderContentsInfoTip",
+                       "originalState":  "EXISTS",
+                       "originalValue":  0,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                       "name":  "ShowSyncProviderNotifications",
+                       "originalState":  "EXISTS",
+                       "originalValue":  0,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                       "name":  "DisallowShaking",
+                       "originalState":  "VALUE_NOT_EXISTS",
+                       "originalValue":  null,
+                       "originalType":  null
+                   },
+                   {
+                       "path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+                       "name":  "ShowRecent",
+                       "originalState":  "EXISTS",
+                       "originalValue":  0,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+                       "name":  "ShowFrequent",
+                       "originalState":  "EXISTS",
+                       "originalValue":  0,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+                       "name":  "ShowCloudFilesInQuickAccess",
+                       "originalState":  "EXISTS",
+                       "originalValue":  0,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKLM:\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+                       "name":  "SettingsPageVisibility",
+                       "originalState":  "EXISTS",
+                       "originalValue":  "hide:aicomponents;appactions;cortana;cortana-language;cortana-moredetails;cortana-notifications;delivery-optimization;gaming-broadcasting;gaming-gamebar;gaming-gamedvr;gaming-gamemode;gaming-trueplay;gaming-xboxnetworking;home;mobile-devices;mobile-devices-addphone;powersleep;signinoptions;sync;windowsdefender;windowsupdate",
+                       "originalType":  "String"
+                   },
+                   {
+                       "path":  "HKCU:\\Software\\Policies\\Microsoft\\Windows\\Personalization",
+                       "name":  "NoLockScreen",
+                       "originalState":  "NOT_EXISTS",
+                       "originalValue":  null,
+                       "originalType":  null
+                   },
+                   {
+                       "path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\DeviceGuard",
+                       "name":  "EnableVirtualizationBasedSecurity",
+                       "originalState":  "EXISTS",
+                       "originalValue":  0,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager",
+                       "name":  "DisableWpbtExecution",
+                       "originalState":  "EXISTS",
+                       "originalValue":  1,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager",
+                       "name":  "SmpDisableWpbtExecution",
+                       "originalState":  "VALUE_NOT_EXISTS",
+                       "originalValue":  null,
+                       "originalType":  null
+                   },
+                   {
+                       "path":  "HKCU:\\Software\\Microsoft\\Multimedia\\Audio",
+                       "name":  "UserDuckingPreference",
+                       "originalState":  "EXISTS",
+                       "originalValue":  3,
+                       "originalType":  "DWord"
+                   },
+                   {
+                       "path":  "HKCU:\\Control Panel\\Mouse",
+                       "name":  "RawMouseThrottleEnabled",
+                       "originalState":  "VALUE_NOT_EXISTS",
+                       "originalValue":  null,
+                       "originalType":  null
+                   },
+                   {
+                       "path":  "HKCU:\\Control Panel\\Mouse",
+                       "name":  "MouseSpeed",
+                       "originalState":  "EXISTS",
+                       "originalValue":  "0",
+                       "originalType":  "String"
+                   },
+                   {
+                       "path":  "HKCU:\\Control Panel\\Mouse",
+                       "name":  "MouseThreshold1",
+                       "originalState":  "EXISTS",
+                       "originalValue":  "0",
+                       "originalType":  "String"
+                   },
+                   {
+                       "path":  "HKCU:\\Control Panel\\Mouse",
+                       "name":  "MouseThreshold2",
+                       "originalState":  "EXISTS",
+                       "originalValue":  "0",
+                       "originalType":  "String"
+                   },
+                   {
+                       "path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Services\\mouclass\\Parameters",
+                       "name":  "MouseDataQueueSize",
+                       "originalState":  "VALUE_NOT_EXISTS",
+                       "originalValue":  null,
+                       "originalType":  null
+                   },
+                   {
+                       "path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Services\\kbdclass\\Parameters",
+                       "name":  "KeyboardDataQueueSize",
+                       "originalState":  "EXISTS",
+                       "originalValue":  100,
+                       "originalType":  "DWord"
+                   }
+               ]
+}

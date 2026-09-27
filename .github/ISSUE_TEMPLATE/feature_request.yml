@@ -1,0 +1,25 @@
+name: "✨ Feature Request / Предложение"
+description: "Предложить новый твик, улучшение алгоритма или поддержку оборудования"
+title: "[FEATURE]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Предлагайте только технически обоснованные параметры с подтверждённым влиянием на задержки (DPC latency, frame-times).
+  - type: textarea
+    id: feature_description
+    attributes:
+      label: "Описание предложения"
+      description: "Какой параметр реестра, политику или модуль вы хотите добавить?"
+      placeholder: "Предлагаю добавить настройку..."
+    validations:
+      required: true
+  - type: textarea
+    id: technical_rationale
+    attributes:
+      label: "Техническое обоснование и источники"
+      description: "Приведите документацию Microsoft Learn, тесты LatencyMon, PresentMon или исследования ядра."
+      placeholder: "Параметр X описан в документации Microsoft: https://learn.microsoft.com/..."
+    validations:
+      required: true
