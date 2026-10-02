@@ -1,7 +1,7 @@
 <div align="center">
 
-# ⚡ Windows Optimization Suite (v2.1)
-### Ultimate Low-Latency Gaming & System Optimizer for Windows 11
+  <h1>⚡ Windows Optimization Suite (v2.1)</h1>
+  <h3>Ultimate Low-Latency Gaming & System Optimizer for Windows 11</h3>
 
 [![Windows 11](https://img.shields.io/badge/Windows_11-24H2%20%7C%2023H2-0078D4?logo=windows11&logoColor=white)](https://microsoft.com/windows)
 [![PowerShell](https://img.shields.io/badge/PowerShell-5.1%20%7C%207%2B-5391FE?logo=powershell&logoColor=white)](https://github.com/PowerShell/PowerShell)
