@@ -1,6 +1,6 @@
 ﻿<div align="center">
 
-<img src="https://media.giphy.com/media/3o7TKrEzvLbgzGmM2Q/giphy.gif" width="100%" alt="Cyberpunk 60FPS Header">
+<img src="./assets/banner.gif" width="100%" alt="Cyberpunk 60FPS Header">
 
 <br>
 
