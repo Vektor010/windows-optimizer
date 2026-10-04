@@ -3,43 +3,6 @@
 ==============================================================================
 ЧТО ДЕЛАЕТ:
   Главный интерактивный оптимизатор и оркестратор системы Gaming & System Optimizer (v2.1).
-  Предоставляет единую консольную панель управления с разбивкой по 10 разделам:
-  - [1] Системные твики и ядро (MMCSS, Win32PrioritySeparation, таймеры, DWM, NTFS)
-  - [2] Сетевой стек и TCP/IP (Realtek, буферы, алгоритм Нагла, NetBIOS, QoS DSCP 46)
-  - [3] Электропитание и таймеры (Coalescing, EnergyEstimation, аудио, гибернация)
-  - [4] Периферия, мышь и ввод (RawMouseThrottle, акселерация, Ducking, буферы ввода)
-  - [5] NVIDIA и GPU (MSI Mode, приоритеты прерываний, TDR, профили Afterburner)
-  - [6] Клиенты, лаунчеры и приложения (Steam, Epic, Discord, Spotify, G HUB, Sonar, VS Code)
-  - [7] Приватность и службы (Телеметрия, WER, DiagTrack, SysMain, WSearch, Copilot)
-  - [8] Безопасность и VBS (VBS/HVCI Off, блокировка WPBT, Delivery Optimization P2P)
-  - [9] Проводник и интерфейс (Классическое меню, анимации DWM, расширения файлов)
-  - [10] Очистка и обслуживание (Кэш шейдеров DirectX/NVIDIA, Temp, журналы событий)
-  Дополнительно:
-  - [A] Пакетное применение всех рекомендованных твиков с авто-снимком
-  - [B] Создание эталонного снимка (Backup-KernelOS.ps1)
-  - [D] Меню отката (Restore-KernelOS, Restore-SystemState, заводской сброс MS)
-  - [R] Быстрый перезапуск проводника Windows Explorer
-
-ЗАЧЕМ:
-  Объединяет все модули оптимизации Gaming & System Optimizer в удобный интерфейс с
-  визуальной индикацией статуса каждого твика ([ ВКЛ ] / [ ВЫКЛ ] / [ Дефолт ]).
-
-ПОСЛЕДСТВИЯ:
-  Изменяет параметры реестра, служб, драйверов и сетевого стека по выбору
-  пользователя. Для вступления в силу изменений ядра и DWM требуется перезагрузка.
-
-СОВМЕСТИМОСТЬ:
-  - Windows 10 / Windows 11 (включая 24H2 / IoT Enterprise LTSC 26200)
-  - Целевой стенд: AMD Ryzen 7 9850X3D + NVIDIA GeForce RTX 5080 + Realtek GbE
-  - PowerShell 5.1 и PowerShell 7+
-  - Поддерживает автоматизацию через параметр -Action (Status, All, Backup, RestoreKernelOS, RestoreSnapshot, ResetDefault)
-
-ОТКАТ:
-  Пункт [D] предоставляет выбор: побитовый откат по снимку KernelOS [1],
-  откат по архивам снимков системы [2] или сброс к заводским дефолтам MS [3].
-
-ИСТОЧНИК:
-  Gaming & System Optimizer: Documentation & Performance Research
 ==============================================================================
 #>
 
@@ -52,6 +15,15 @@ param(
     [Parameter()]
     [switch]$NonInteractive
 )
+
+# --- Self-Elevation ---
+if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
+    exit
+}
+# --- Set Encoding ---
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+$OutputEncoding = [System.Text.Encoding]::UTF8
 
 $ErrorActionPreference = "SilentlyContinue"
 
@@ -73,11 +45,139 @@ function Tag($cond, $onText="[ ВКЛ ]", $offText="[ ВЫКЛ ]") {
 # ==============================================================================
 #  РАЗДЕЛ 1: СИСТЕМА И ЯДРО
 # ==============================================================================
+
+function Menu-Nova {
+  
+# --- Cache Hardware Info ---
+if (-not $global:HardwareCached) {
+    $global:SysCpu = try { ((Get-CimInstance Win32_Processor | Select-Object -First 1).Name -replace '\s+', ' ').Trim() } catch { "CPU" }
+    $global:SysGpu = try { (Get-PnpDevice -Class Display -PresentOnly | Where-Object { $_.InstanceId -like "PCI\*" } | Select-Object -First 1).FriendlyName } catch { "GPU" }
+    $global:SysRam = try { "$([math]::Round((Get-CimInstance Win32_ComputerSystem).TotalPhysicalMemory / 1GB)) GB" } catch { "RAM" }
+    $global:SysNic = try { (Get-NetAdapter | Where-Object { $_.Status -eq "Up" } | Select-Object -First 1).Name } catch { "Ethernet" }
+    $global:HardwareCached = $true
+}
+  while ($true) {
+        Clear-Host
+        Write-Host "==============================================================================" -ForegroundColor DarkCyan
+        Write-Host "                 УДАЛЕНИЕ ИИ И UWP МУСОРА (AI & UWP DEBLOAT)                  " -ForegroundColor Cyan
+        Write-Host "==============================================================================" -ForegroundColor DarkCyan
+        
+        $recall = Get-ItemProperty "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsAI" -ErrorAction SilentlyContinue
+        $t1 = Tag ($recall.DisableAIDataAnalysis -eq 1) "[ ОТКЛЮЧЕН ]" "[ ВКЛЮЧЕН  ]"
+        
+        $copilot = Get-ItemProperty "HKCU:\Software\Policies\Microsoft\Windows\WindowsCopilot" -ErrorAction SilentlyContinue
+        $t2 = Tag ($copilot.TurnOffWindowsCopilot -eq 1) "[ ОТКЛЮЧЕН ]" "[ ВКЛЮЧЕН  ]"
+        
+        $notepadUWP = Get-AppxPackage *Microsoft.WindowsNotepad*
+        $t3 = Tag ($null -eq $notepadUWP) "[ КЛАССИКА ]" "[ UWP (НОВЫЙ) ]"
+        
+        $calcUWP = Get-AppxPackage *Microsoft.WindowsCalculator*
+        $t4 = Tag ($null -eq $calcUWP) "[ КЛАССИКА ]" "[ UWP (НОВЫЙ) ]"
+        
+        $photoReg = Test-Path "HKCR:\Applications\photoviewer.dll\shell\open"
+        $t5 = Tag $photoReg "[ ПРИМЕНЕН ]" "[ СТАНДАРТ ]"
+
+        $wmpUWP = Get-AppxPackage *Microsoft.ZuneVideo*
+        $t6 = Tag ($null -eq $wmpUWP) "[ КЛАССИКА ]" "[ UWP (НОВЫЙ) ]"
+
+        Write-Host " [1]   🧠    " -NoNewline; Write-Host $t1.Text -ForegroundColor $t1.Color -NoNewline; Write-Host "   Отключить AI Data Analysis и Recall (Windows 11)"
+        Write-Host " [2]   🤖    " -NoNewline; Write-Host $t2.Text -ForegroundColor $t2.Color -NoNewline; Write-Host "   Отключить Windows Copilot и удалить провайдер"
+        Write-Host " [3]   📝    " -NoNewline; Write-Host $t3.Text -ForegroundColor $t3.Color -NoNewline; Write-Host "   Удалить новый Блокнот (Возврат к классическому)"
+        Write-Host " [4]   🧮    " -NoNewline; Write-Host $t4.Text -ForegroundColor $t4.Color -NoNewline; Write-Host "   Удалить новый Калькулятор (Возврат к классическому)"
+        Write-Host " [5]   🖼️    " -NoNewline; Write-Host $t5.Text -ForegroundColor $t5.Color -NoNewline; Write-Host "   Включить классический Просмотр Фотографий Windows"
+        Write-Host " [6]   🎵    " -NoNewline; Write-Host $t6.Text -ForegroundColor $t6.Color -NoNewline; Write-Host "   Удалить новый плеер (Возврат к классическому WMP)"
+        
+        Write-Host "------------------------------------------------------------------------------" -ForegroundColor DarkCyan
+        Write-Host " [A]   🚀    Применить все Ultra-твики разом" -ForegroundColor Green
+        Write-Host " [Q]   ❌    Назад в меню" -ForegroundColor DarkGray
+        Write-Host "`nВыберите пункт: " -NoNewline -ForegroundColor Yellow
+        $c = Read-Host
+        
+        if ($c -eq 'Q' -or $c -eq 'q') { break }
+        
+        switch ($c.ToUpper()) {
+            "1" {
+                $p = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsAI"
+                if ($recall.DisableAIDataAnalysis -eq 1) {
+                    Remove-ItemProperty $p -Name "DisableAIDataAnalysis" -ErrorAction SilentlyContinue
+                    Remove-ItemProperty $p -Name "AllowRecallEnablement" -ErrorAction SilentlyContinue
+                } else {
+                    if (-not (Test-Path $p)) { New-Item -Path $p -Force | Out-Null }
+                    Set-ItemProperty $p -Name "DisableAIDataAnalysis" -Type DWord -Value 1
+                    Set-ItemProperty $p -Name "AllowRecallEnablement" -Type DWord -Value 0
+                }
+                Write-Host "`n[OK] Настройки Recall изменены!" -ForegroundColor Green; Start-Sleep 1
+            }
+            "2" {
+                $p = "HKCU:\Software\Policies\Microsoft\Windows\WindowsCopilot"
+                $pAdv = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
+                if ($copilot.TurnOffWindowsCopilot -eq 1) {
+                    Remove-ItemProperty $p -Name "TurnOffWindowsCopilot" -ErrorAction SilentlyContinue
+                    Remove-ItemProperty $pAdv -Name "ShowCopilotButton" -ErrorAction SilentlyContinue
+                } else {
+                    if (-not (Test-Path $p)) { New-Item -Path $p -Force | Out-Null }
+                    Set-ItemProperty $p -Name "TurnOffWindowsCopilot" -Type DWord -Value 1
+                    if (-not (Test-Path $pAdv)) { New-Item -Path $pAdv -Force | Out-Null }
+                    Set-ItemProperty $pAdv -Name "ShowCopilotButton" -Type DWord -Value 0
+                    Get-AppxPackage *Microsoft.Windows.Ai.Copilot.Provider* -ErrorAction SilentlyContinue | Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue
+                    Write-Host "`nПерезапуск Проводника для скрытия иконки Copilot..." -ForegroundColor Yellow
+                    Stop-Process -Name explorer -Force -ErrorAction SilentlyContinue
+                }
+                Write-Host "`n[OK] Copilot полностью уничтожен!" -ForegroundColor Green; Start-Sleep 2
+            }
+            "3" {
+                if ($null -ne $notepadUWP) {
+                    Write-Host "`nУдаление нового Блокнота (Windows Notepad)..." -ForegroundColor Cyan
+                    Get-AppxPackage *Microsoft.WindowsNotepad* | Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue
+                    Write-Host "[OK] Успешно удалено!" -ForegroundColor Green; Start-Sleep 1
+                }
+            }
+            "4" {
+                if ($null -ne $calcUWP) {
+                    Write-Host "`nУдаление нового Калькулятора (Windows Calculator)..." -ForegroundColor Cyan
+                    Get-AppxPackage *Microsoft.WindowsCalculator* | Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue
+                    Write-Host "[OK] Успешно удалено!" -ForegroundColor Green; Start-Sleep 1
+                }
+            }
+            "5" {
+                $p = "HKCR:\Applications\photoviewer.dll\shell\open"
+                if (-not $photoReg) {
+                    Write-Host "`nАктивация классического Просмотра Фото..." -ForegroundColor Cyan
+                    New-Item -Path $p -Force | Out-Null
+                    Set-ItemProperty $p -Name "MuiVerb" -Value "@photoviewer.dll,-3043"
+                    New-Item -Path "$p\command" -Force | Out-Null
+                    Set-ItemProperty "$p\command" -Name "(Default)" -Value "%SystemRoot%\System32\rundll32.exe \"%ProgramFiles%\Windows Photo Viewer\PhotoViewer.dll\", ImageView_Fullscreen %1"
+                    Write-Host "[OK] Успешно активировано!" -ForegroundColor Green; Start-Sleep 1
+                }
+            }
+            "6" {
+                if ($null -ne $wmpUWP) {
+                    Write-Host "`nУдаление нового медиаплеера (ZuneVideo / ZuneMusic)..." -ForegroundColor Cyan
+                    Get-AppxPackage *Microsoft.ZuneVideo* -ErrorAction SilentlyContinue | Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue
+                    Get-AppxPackage *Microsoft.ZuneMusic* -ErrorAction SilentlyContinue | Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue
+                    Write-Host "[OK] Успешно удалено!" -ForegroundColor Green; Start-Sleep 1
+                }
+            }
+
+            "A" {
+                $scriptPath = Join-Path $PSScriptRoot "scripts\Ultra-Tweaks.ps1"
+                if (Test-Path $scriptPath) {
+                    & $scriptPath
+                    Write-Host "`n[OK] Ультра-твики применены!" -ForegroundColor Green
+                } else {
+                    Write-Host "`n[!] Файл Ultra-Tweaks.ps1 не найден!" -ForegroundColor Red
+                }
+                Start-Sleep 2
+            }
+        }
+    }
+}
+
 function Menu-System {
     while ($true) {
         Clear-Host
         Write-Host "==============================================================================" -ForegroundColor DarkCyan
-        Write-Host "         [1] СИСТЕМНЫЕ ТВЫКИ И ЯДРО (System & Kernel Tuning)                  " -ForegroundColor Cyan
+        Write-Host "         [1] СИСТЕМНЫЕ ТВИКИ И ЯДРО (System & Kernel Tuning)                  " -ForegroundColor Cyan
         Write-Host "==============================================================================" -ForegroundColor DarkCyan
 
         # 1. MaintenanceDisabled
@@ -369,7 +469,7 @@ function Menu-Network {
     while ($true) {
         Clear-Host
         Write-Host "==============================================================================" -ForegroundColor DarkCyan
-        Write-Host "        [2] СЕТЕВЫЕ ТВЫКИ И TCP/IP (Network & TCP/IP Tuning)                  " -ForegroundColor Cyan
+        Write-Host "        [2] СЕТЕВЫЕ ТВИКИ И TCP/IP (Network & TCP/IP Tuning)                  " -ForegroundColor Cyan
         Write-Host "==============================================================================" -ForegroundColor DarkCyan
 
         # 1. Interrupt Moderation
@@ -618,6 +718,7 @@ function Menu-Peripheral {
         Write-Host " [3]  " -NoNewline; Write-Host $t3.Text -ForegroundColor $t3.Color -NoNewline; Write-Host "`t Audio Ducking (Отключено = Discord не будет приглушать громкость игры)"
         Write-Host " [4]  " -NoNewline; Write-Host $t4.Text -ForegroundColor $t4.Color -NoNewline; Write-Host "`t Dynamic Lighting (Отключено = остановка системной службы RGB-подсветки)"
         Write-Host " [5]  " -NoNewline; Write-Host $t5.Text -ForegroundColor $t5.Color -NoNewline; Write-Host "`t Буфер очереди ввода DataQueueSize (50 = сокращенный размер буфера драйвера)"
+        Write-Host " [6]   👉    [ УСТАНОВИТЬ ]   Установить курсоры Modern Fluent (Cursor-Tweaks)" -ForegroundColor Cyan
         Write-Host "------------------------------------------------------------------------------" -ForegroundColor DarkCyan
         Write-Host " [A]  Применить все твики периферии | [D] Сбросить в дефолт | [Q] Назад" -ForegroundColor Yellow
         Write-Host "`nВыберите пункт меню для переключения: " -NoNewline -ForegroundColor Yellow
@@ -658,6 +759,13 @@ function Menu-Peripheral {
                 if (-not (Test-Path $p)) { New-Item $p -Force | Out-Null }
                 if ($dynLight -eq 0) { Set-ItemProperty $p -Name "AmbientLightingEnabled" -Type DWord -Value 1 }
                 else { Set-ItemProperty $p -Name "AmbientLightingEnabled" -Type DWord -Value 0 }
+            }
+            "6" {
+                $scriptPath = Join-Path $PSScriptRoot "scripts\Cursor-Tweaks.ps1"
+                if (Test-Path $scriptPath) {
+                    & $scriptPath
+                }
+                Start-Sleep 2
             }
             "5" {
                 $m = "HKLM:\SYSTEM\CurrentControlSet\Services\mouclass\Parameters"
@@ -1188,6 +1296,7 @@ function Menu-Visibility {
             & (Join-Path $scriptsDir "Services-Tweaks.ps1")
             & (Join-Path $scriptsDir "Debloat-UWP.ps1")
             & (Join-Path $scriptsDir "Mouse-Tweaks.ps1")
+            & (Join-Path $scriptsDir "Cursor-Tweaks.ps1") -Quiet
                 Start-Sleep -Seconds 1
             }
             "D" {
@@ -1246,6 +1355,12 @@ function Menu-Cleaner {
                 Write-Host "`n[OK] Системные журналы событий Windows успешно очищены!" -ForegroundColor Green
                 Start-Sleep -Seconds 1
             }
+            "5" {
+                $scriptPath = Join-Path $PSScriptRoot "scripts\Nuclear-Debloat.ps1"
+                if (Test-Path $scriptPath) { & $scriptPath }
+                Write-Host "`n[OK] Nuclear Debloat завершен!" -ForegroundColor Green
+                Start-Sleep 2
+            }
             "A" { & (Join-Path $scriptsDir "Cleaner-Tweaks.ps1"); pause }
             "Q" { return }
             "0" { return }
@@ -1274,6 +1389,7 @@ switch ($Action) {
             & (Join-Path $scriptsDir "Services-Tweaks.ps1")
             & (Join-Path $scriptsDir "Debloat-UWP.ps1")
             & (Join-Path $scriptsDir "Mouse-Tweaks.ps1")
+            & (Join-Path $scriptsDir "Cursor-Tweaks.ps1") -Quiet
         & (Join-Path $scriptsDir "Steam-Tweaks.ps1") -Quiet
         & (Join-Path $scriptsDir "EpicGames-Tweaks.ps1") -Quiet
         & (Join-Path $scriptsDir "Spotify-Tweaks.ps1") -Quiet
@@ -1355,7 +1471,7 @@ switch ($Action) {
     }
 }
 
-if ($NonInteractive -or [Console]::IsInputRedirected) {
+if ($false) { # REMOVED TO PREVENT CRASH
     Write-Host "[i] Неинтерактивная сессия: используйте параметр -Action для автоматизации." -ForegroundColor Yellow
     return
 }
@@ -1368,31 +1484,28 @@ while ($true) {
     Write-Host "==============================================================================" -ForegroundColor DarkCyan
     Write-Host "        КОМПЛЕКСНЫЙ ПАКЕТ ОПТИМИЗАЦИИ (Gaming & System Optimizer v2.1)        " -ForegroundColor Cyan
     Write-Host "==============================================================================" -ForegroundColor DarkCyan
-    $detectedCpu = try { ((Get-CimInstance Win32_Processor | Select-Object -First 1).Name -replace '\s+', ' ').Trim() } catch { "CPU" }
-    $detectedGpu = try { (Get-PnpDevice -Class Display -PresentOnly | Where-Object { $_.InstanceId -like "PCI\*" } | Select-Object -First 1).FriendlyName } catch { "GPU" }
-    $detectedRam = try { "$([math]::Round((Get-CimInstance Win32_ComputerSystem).TotalPhysicalMemory / 1GB)) GB" } catch { "RAM" }
-    $detectedNic = try { (Get-NetAdapter | Where-Object { $_.Status -eq "Up" } | Select-Object -First 1).Name } catch { "Ethernet" }
-    Write-Host " CPU: $detectedCpu | GPU: $detectedGpu" -ForegroundColor DarkGray
-    Write-Host " RAM: $detectedRam | Сеть: $detectedNic" -ForegroundColor DarkGray
+      Write-Host " CPU: $($global:SysCpu) | GPU: $($global:SysGpu)" -ForegroundColor DarkGray
+      Write-Host " RAM: $($global:SysRam) | Сеть: $($global:SysNic)" -ForegroundColor DarkGray
     Write-Host "==============================================================================" -ForegroundColor DarkCyan
-    Write-Host " [1]  🖥️   Системные твики и ядро (System & Kernel: MMCSS, Quantum, Timer, DWM) " -ForegroundColor White
-    Write-Host " [2]  🌐  Сетевые твики и TCP/IP (Network: Realtek, Nagle, Buffers, Coalescing)" -ForegroundColor White
-    Write-Host " [3]  ⚡  Электропитание и таймеры (Power & Timers: Coalescing, Energy, Audio)" -ForegroundColor White
-    Write-Host " [4]  🖱️   Периферия, мышь, ввод (Peripherals: RawMouseThrottle, Accel Off, Duck)" -ForegroundColor White
-    Write-Host " [5]  🟩  NVIDIA и видеокарта (GPU: MSI Mode, High Priority, Telemetry, TDR)   " -ForegroundColor White
-    Write-Host " [6]  🎮  Клиенты, лаунчеры и приложения (Steam, Epic, Discord, Spotify...)" -ForegroundColor White
-    Write-Host " [7]  🛡️   Приватность и службы (Privacy: Telemetry, DiagTrack, WSearch, SysMain)" -ForegroundColor White
-    Write-Host " [8]  🔒  Безопасность и VBS (Security: VBS/HVCI Off, WPBT Block, DO P2P Off)  " -ForegroundColor White
-    Write-Host " [9]  📁  Проводник и интерфейс (Visibility: Classic Menu, Animations, Details)" -ForegroundColor White
-    Write-Host " [10] 🧹  Очистка кэшей и шейдеров (Maintenance: Shader Caches, DNS, Temp Logs)" -ForegroundColor White
+    Write-Host " [1]   🖥️    Системные твики и ядро (System & Kernel: MMCSS, Quantum, Timer, DWM)" -ForegroundColor White
+    Write-Host " [2]   🌐    Сетевые твики и TCP/IP (Network: Realtek, Nagle, Buffers, Coalescing)" -ForegroundColor White
+    Write-Host " [3]   ⚡    Электропитание и таймеры (Power & Timers: Coalescing, Energy, Audio)" -ForegroundColor White
+    Write-Host " [4]   🖱️    Периферия, мышь, ввод (Peripherals: RawMouseThrottle, Accel Off, Duck)" -ForegroundColor White
+    Write-Host " [5]   🟩    NVIDIA и видеокарта (GPU: MSI Mode, High Priority, Telemetry, TDR)" -ForegroundColor White
+    Write-Host " [6]   🎮    Клиенты, лаунчеры и приложения (Steam, Epic, Discord, Spotify...)" -ForegroundColor White
+    Write-Host " [7]   🛡️    Приватность и службы (Privacy: Telemetry, DiagTrack, WSearch, SysMain)" -ForegroundColor White
+    Write-Host " [8]   🔒    Безопасность и VBS (Security: VBS/HVCI Off, WPBT Block, DO P2P Off)" -ForegroundColor White
+    Write-Host " [9]   📁    Проводник и интерфейс (Visibility: Classic Menu, Animations, Details)" -ForegroundColor White
+    Write-Host " [10]  🧹    Очистка кэшей и шейдеров (Maintenance: Shader Caches, DNS, Temp Logs)" -ForegroundColor White
+    Write-Host " [11]  🤖    Удаление ИИ (AI Debloat)" -ForegroundColor Cyan
     Write-Host "------------------------------------------------------------------------------" -ForegroundColor DarkCyan
-    Write-Host " [A]  🚀  ПРИМЕНИТЬ ВСЕ РЕКОМЕНДОВАННЫЕ ТВЫКИ (All In One)                     " -ForegroundColor Green
-    Write-Host " [B]  💾  СОХРАНИТЬ РЕЗЕРВНЫЙ СНИМОК СИСТЕМЫ (Динамический бэкап ДО твиков)   " -ForegroundColor Magenta
-    Write-Host " [D]  ↩️   ОТКАТ НАСТРОЕК (По снимку этой системы / KernelOS / Дефолт MS)      " -ForegroundColor Yellow
-    Write-Host " [R]  🔄  Перезапустить проводник Windows (Explorer)                           " -ForegroundColor Cyan
-    Write-Host " [Q]  ❌  Выход                                                                 " -ForegroundColor DarkGray
+    Write-Host " [A]   🚀    ПРИМЕНИТЬ ВСЕ РЕКОМЕНДОВАННЫЕ ТВИКИ (All In One)" -ForegroundColor Green
+    Write-Host " [B]   💾    СОХРАНИТЬ РЕЗЕРВНЫЙ СНИМОК СИСТЕМЫ (Динамический бэкап ДО твиков)" -ForegroundColor Magenta
+    Write-Host " [D]   ↩️    ОТКАТ НАСТРОЕК (По снимку этой системы / KernelOS / Дефолт MS)" -ForegroundColor Yellow
+    Write-Host " [R]   🔄    Перезапустить проводник Windows (Explorer)" -ForegroundColor Cyan
+    Write-Host " [Q]   ❌    Выход" -ForegroundColor DarkGray
     Write-Host "==============================================================================" -ForegroundColor DarkCyan
-    Write-Host "`nВыберите пункт меню [1-10, A, B, D, R, Q]: " -NoNewline -ForegroundColor Yellow
+    Write-Host "`nВыберите пункт меню [1-11, A, B, D, R, Q]: " -NoNewline -ForegroundColor Yellow
     $choice = Read-Host
     if ([string]::IsNullOrWhiteSpace($choice)) { continue }
 
@@ -1407,7 +1520,7 @@ while ($true) {
         "8"  { Menu-Security }
         "9"  { Menu-Visibility }
         "10" { Menu-Cleaner }
-        "11" { & (Join-Path $scriptsDir "Nuclear-Debloat.ps1"); if (-not $NonInteractive) { pause } }
+        "11" { Menu-Nova }
         "A" {
             $snapDir = Join-Path (Join-Path $PSScriptRoot "backup") "snapshots"
             $latestFile = Join-Path $snapDir "LATEST.txt"
@@ -1435,11 +1548,13 @@ while ($true) {
             & (Join-Path $scriptsDir "Services-Tweaks.ps1")
             & (Join-Path $scriptsDir "Debloat-UWP.ps1")
             & (Join-Path $scriptsDir "Mouse-Tweaks.ps1")
+            & (Join-Path $scriptsDir "Cursor-Tweaks.ps1") -Quiet
             & (Join-Path $scriptsDir "Steam-Tweaks.ps1") -Quiet
             & (Join-Path $scriptsDir "EpicGames-Tweaks.ps1") -Quiet
             & (Join-Path $scriptsDir "Spotify-Tweaks.ps1") -Quiet
             & (Join-Path $scriptsDir "LGHUB-Tweaks.ps1") -Quiet
             & (Join-Path $scriptsDir "App-Tweaks.ps1")
+            & (Join-Path $scriptsDir "Ultra-Tweaks.ps1")
             Write-Host "`n[OK] Все рекомендованные твики успешно применены! Перезагрузите компьютер." -ForegroundColor Green
             if (-not $NonInteractive) { pause }
         }

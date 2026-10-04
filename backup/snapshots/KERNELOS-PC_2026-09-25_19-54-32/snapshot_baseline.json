@@ -1,0 +1,292 @@
+﻿{
+    "Metadata":  {
+                     "ComputerName":  "KERNELOS-PC",
+                     "UserName":  "Administrator",
+                     "Created":  "2026-09-25T19:54:32.4523390+05:00",
+                     "OSVersion":  "Microsoft Windows 11 IoT Enterprise LTSC",
+                     "Build":  "26200"
+                 },
+    "Parameters":  [
+                       {
+                           "Key":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl",
+                           "Name":  "Win32PrioritySeparation",
+                           "Exists":  true,
+                           "Value":  38,
+                           "ValueKind":  "DWord"
+                       },
+                       {
+                           "Key":  "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
+                           "Name":  "SystemResponsiveness",
+                           "Exists":  true,
+                           "Value":  10,
+                           "ValueKind":  "DWord"
+                       },
+                       {
+                           "Key":  "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
+                           "Name":  "NetworkThrottlingIndex",
+                           "Exists":  true,
+                           "Value":  4294967295,
+                           "ValueKind":  "DWord"
+                       },
+                       {
+                           "Key":  "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
+                           "Name":  "NoLazyMode",
+                           "Exists":  true,
+                           "Value":  1,
+                           "ValueKind":  "DWord"
+                       },
+                       {
+                           "Key":  "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+                           "Name":  "GPU Priority",
+                           "Exists":  true,
+                           "Value":  8,
+                           "ValueKind":  "DWord"
+                       },
+                       {
+                           "Key":  "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+                           "Name":  "Priority",
+                           "Exists":  true,
+                           "Value":  6,
+                           "ValueKind":  "DWord"
+                       },
+                       {
+                           "Key":  "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+                           "Name":  "Scheduling Category",
+                           "Exists":  true,
+                           "Value":  "High",
+                           "ValueKind":  "String"
+                       },
+                       {
+                           "Key":  "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+                           "Name":  "SFIO Priority",
+                           "Exists":  true,
+                           "Value":  "High",
+                           "ValueKind":  "String"
+                       },
+                       {
+                           "Key":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+                           "Name":  "SerializeTimerExpiration",
+                           "Exists":  true,
+                           "Value":  2,
+                           "ValueKind":  "DWord"
+                       },
+                       {
+                           "Key":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+                           "Name":  "ThreadDpcEnable",
+                           "Exists":  true,
+                           "Value":  1,
+                           "ValueKind":  "DWord"
+                       },
+                       {
+                           "Key":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+                           "Name":  "TdrDelay",
+                           "Exists":  true,
+                           "Value":  10,
+                           "ValueKind":  "DWord"
+                       },
+                       {
+                           "Key":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+                           "Name":  "TdrDdiDelay",
+                           "Exists":  false,
+                           "Value":  null,
+                           "ValueKind":  null
+                       },
+                       {
+                           "Key":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+                           "Name":  "DisableOverlays",
+                           "Exists":  true,
+                           "Value":  0,
+                           "ValueKind":  "DWord"
+                       },
+                       {
+                           "Key":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+                           "Name":  "ForceDirectFlip",
+                           "Exists":  true,
+                           "Value":  1,
+                           "ValueKind":  "DWord"
+                       },
+                       {
+                           "Key":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+                           "Name":  "HwSchMode",
+                           "Exists":  true,
+                           "Value":  2,
+                           "ValueKind":  "DWord"
+                       },
+                       {
+                           "Key":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+                           "Name":  "DisablePagingExecutive",
+                           "Exists":  true,
+                           "Value":  1,
+                           "ValueKind":  "DWord"
+                       },
+                       {
+                           "Key":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+                           "Name":  "SleepStudyDisabled",
+                           "Exists":  true,
+                           "Value":  1,
+                           "ValueKind":  "DWord"
+                       },
+                       {
+                           "Key":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "Name":  "CoalescingTimerInterval",
+                           "Exists":  false,
+                           "Value":  null,
+                           "ValueKind":  null
+                       },
+                       {
+                           "Key":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "Name":  "EnergyEstimationDisabled",
+                           "Exists":  false,
+                           "Value":  null,
+                           "ValueKind":  null
+                       },
+                       {
+                           "Key":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerThrottling",
+                           "Name":  "PowerThrottlingOff",
+                           "Exists":  true,
+                           "Value":  1,
+                           "ValueKind":  "DWord"
+                       },
+                       {
+                           "Key":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\DeviceGuard",
+                           "Name":  "EnableVirtualizationBasedSecurity",
+                           "Exists":  true,
+                           "Value":  0,
+                           "ValueKind":  "DWord"
+                       },
+                       {
+                           "Key":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager",
+                           "Name":  "DisableWpbtExecution",
+                           "Exists":  true,
+                           "Value":  1,
+                           "ValueKind":  "DWord"
+                       },
+                       {
+                           "Key":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager",
+                           "Name":  "SmpDisableWpbtExecution",
+                           "Exists":  false,
+                           "Value":  null,
+                           "ValueKind":  null
+                       },
+                       {
+                           "Key":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+                           "Name":  "NtfsDisable8dot3NameCreation",
+                           "Exists":  true,
+                           "Value":  1,
+                           "ValueKind":  "DWord"
+                       },
+                       {
+                           "Key":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+                           "Name":  "NtfsDisableLastAccessUpdate",
+                           "Exists":  true,
+                           "Value":  1,
+                           "ValueKind":  "DWord"
+                       },
+                       {
+                           "Key":  "HKCU:\\Software\\Microsoft\\Multimedia\\Audio",
+                           "Name":  "UserDuckingPreference",
+                           "Exists":  true,
+                           "Value":  3,
+                           "ValueKind":  "DWord"
+                       },
+                       {
+                           "Key":  "HKCU:\\Control Panel\\Mouse",
+                           "Name":  "RawMouseThrottleEnabled",
+                           "Exists":  false,
+                           "Value":  null,
+                           "ValueKind":  null
+                       },
+                       {
+                           "Key":  "HKLM:\\SYSTEM\\CurrentControlSet\\Services\\mouclass\\Parameters",
+                           "Name":  "MouseDataQueueSize",
+                           "Exists":  false,
+                           "Value":  null,
+                           "ValueKind":  null
+                       },
+                       {
+                           "Key":  "HKLM:\\SYSTEM\\CurrentControlSet\\Services\\kbdclass\\Parameters",
+                           "Name":  "KeyboardDataQueueSize",
+                           "Exists":  true,
+                           "Value":  100,
+                           "ValueKind":  "DWord"
+                       },
+                       {
+                           "Key":  "HKCU:\\Software\\Microsoft\\Windows\\DWM",
+                           "Name":  "DisallowAnimations",
+                           "Exists":  false,
+                           "Value":  null,
+                           "ValueKind":  null
+                       },
+                       {
+                           "Key":  "HKLM:\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+                           "Name":  "SettingsPageVisibility",
+                           "Exists":  true,
+                           "Value":  "hide:aicomponents;appactions;cortana;cortana-language;cortana-moredetails;cortana-notifications;delivery-optimization;gaming-broadcasting;gaming-gamebar;gaming-gamedvr;gaming-gamemode;gaming-trueplay;gaming-xboxnetworking;home;mobile-devices;mobile-devices-addphone;powersleep;signinoptions;sync;windowsdefender;windowsupdate",
+                           "ValueKind":  "String"
+                       },
+                       {
+                           "Key":  "HKCU:\\Software\\Microsoft\\GameBar",
+                           "Name":  "AllowAutoGameMode",
+                           "Exists":  true,
+                           "Value":  1,
+                           "ValueKind":  "DWord"
+                       },
+                       {
+                           "Key":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\GameDVR",
+                           "Name":  "AppCaptureEnabled",
+                           "Exists":  true,
+                           "Value":  0,
+                           "ValueKind":  "DWord"
+                       }
+                   ],
+    "Services":  [
+                     {
+                         "Name":  "SysMain",
+                         "Exists":  true,
+                         "Status":  "Stopped",
+                         "StartMode":  "Disabled"
+                     },
+                     {
+                         "Name":  "WSearch",
+                         "Exists":  true,
+                         "Status":  "Stopped",
+                         "StartMode":  "Disabled"
+                     },
+                     {
+                         "Name":  "DiagTrack",
+                         "Exists":  true,
+                         "Status":  "Stopped",
+                         "StartMode":  "Disabled"
+                     },
+                     {
+                         "Name":  "MapsBroker",
+                         "Exists":  true,
+                         "Status":  "Stopped",
+                         "StartMode":  "Disabled"
+                     },
+                     {
+                         "Name":  "WerSvc",
+                         "Exists":  true,
+                         "Status":  "Stopped",
+                         "StartMode":  "Disabled"
+                     },
+                     {
+                         "Name":  "Spooler",
+                         "Exists":  true,
+                         "Status":  "Stopped",
+                         "StartMode":  "Disabled"
+                     },
+                     {
+                         "Name":  "NVDisplay.ContainerLocalSystem",
+                         "Exists":  true,
+                         "Status":  "Stopped",
+                         "StartMode":  "Disabled"
+                     },
+                     {
+                         "Name":  "NvTelemetryContainer",
+                         "Exists":  false,
+                         "Status":  null,
+                         "StartMode":  null
+                     }
+                 ]
+}
