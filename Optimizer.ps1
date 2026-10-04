@@ -1184,7 +1184,8 @@ function Menu-Visibility {
                 Set-ItemProperty $p -Name "EnthusiastMode" -Type DWord -Value $v
             }
             "A" {
-                            & (Join-Path $scriptsDir "Visibility-Tweaks.ps1")
+                                        & (Join-Path $scriptsDir "Visibility-Tweaks.ps1")
+            & (Join-Path $scriptsDir "Services-Tweaks.ps1")
             & (Join-Path $scriptsDir "Debloat-UWP.ps1")
             & (Join-Path $scriptsDir "Mouse-Tweaks.ps1")
                 Start-Sleep -Seconds 1
@@ -1269,7 +1270,8 @@ switch ($Action) {
         & (Join-Path $scriptsDir "Network-Tweaks.ps1")
         & (Join-Path $scriptsDir "Security-Tweaks.ps1")
         & (Join-Path $scriptsDir "Privacy-Tweaks.ps1")
-                    & (Join-Path $scriptsDir "Visibility-Tweaks.ps1")
+                                & (Join-Path $scriptsDir "Visibility-Tweaks.ps1")
+            & (Join-Path $scriptsDir "Services-Tweaks.ps1")
             & (Join-Path $scriptsDir "Debloat-UWP.ps1")
             & (Join-Path $scriptsDir "Mouse-Tweaks.ps1")
         & (Join-Path $scriptsDir "Steam-Tweaks.ps1") -Quiet
@@ -1428,7 +1430,8 @@ while ($true) {
             & (Join-Path $scriptsDir "Network-Tweaks.ps1")
             & (Join-Path $scriptsDir "Security-Tweaks.ps1")
             & (Join-Path $scriptsDir "Privacy-Tweaks.ps1")
-                        & (Join-Path $scriptsDir "Visibility-Tweaks.ps1")
+                                    & (Join-Path $scriptsDir "Visibility-Tweaks.ps1")
+            & (Join-Path $scriptsDir "Services-Tweaks.ps1")
             & (Join-Path $scriptsDir "Debloat-UWP.ps1")
             & (Join-Path $scriptsDir "Mouse-Tweaks.ps1")
             & (Join-Path $scriptsDir "Steam-Tweaks.ps1") -Quiet
