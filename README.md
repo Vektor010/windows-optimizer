@@ -1,19 +1,22 @@
 <div align="center">
 
-<img src="https://i.pinimg.com/originals/4e/a2/12/4ea212faeaee83c48f86959c90382025.gif" width="100%" alt="Cyberpunk Header">
+<img src="https://c.tenor.com/b9u2a8r1P2QAAAAC/cpu-processor.gif" width="100%" alt="Cyberpunk CPU Header">
 
-# 🌌 NOVA CORE OPTIMIZER (v3.0)
-### Ультимативный Киберпанк-Твикер для Windows 11
+<br>
 
-[![Windows 11](https://img.shields.io/badge/Windows_11-24H2%20%7C%2023H2-0078D4?logo=windows11&logoColor=white)](https://microsoft.com/windows)
-[![PowerShell](https://img.shields.io/badge/PowerShell-5.1%20%7C%207%2B-5391FE?logo=powershell&logoColor=white)](https://github.com/PowerShell/PowerShell)
-[![Latency](https://img.shields.io/badge/DPC_Latency-%3C_10_%C2%B5s-success)](#)
-[![AI Debloat](https://img.shields.io/badge/AI_Debloat-Copilot_%7C_Recall_Removed-FF0000)](#)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue)](LICENSE)
+<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=800&size=45&duration=3000&pause=1000&color=00FFFF&center=true&vCenter=true&width=800&lines=NOVA+CORE+OPTIMIZER+v3.0;DPC+LATENCY+%3C+1+MS;AMD+RYZEN+9850X3D+READY;ZERO+INPUT+LAG" alt="Typing SVG">
+
+# 🌌 Ультимативный Твикер для Киберспорта
+
+[![Windows 11](https://img.shields.io/badge/Windows_11-24H2%20%7C%2023H2-0078D4?logo=windows11&logoColor=white&style=for-the-badge)](https://microsoft.com/windows)
+[![CPU](https://img.shields.io/badge/CPU-AMD_Ryzen_7_9850X3D-ED1C24?logo=amd&logoColor=white&style=for-the-badge)](#)
+[![GPU](https://img.shields.io/badge/GPU-RTX_5080_Ready-76B900?logo=nvidia&logoColor=white&style=for-the-badge)](#)
+[![Latency](https://img.shields.io/badge/DPC_Latency-%3C_1_ms-00FF00?style=for-the-badge)](#)
+[![AI Debloat](https://img.shields.io/badge/AI_Debloat-Copilot_Killed-FF0000?style=for-the-badge)](#)
 
 <p align="center">
-  <b>Агрессивная, но на 100% безопасная оптимизация Windows 11 для киберспорта и максимального FPS.</b><br>
-  Скрипт перехватывает контроль над ядром, вырезает ИИ (Copilot/Recall), убивает телеметрию и снижает DPC Latency до минимума.<br>
+  <b>Агрессивная, но на 100% безопасная оптимизация Windows 11 для соревновательного гейминга.</b><br>
+  Скрипт перехватывает контроль над ядром, вырезает ИИ (Copilot/Recall), убивает телеметрию и снижает задержку мыши до 1 мс.<br>
   <i>Никакого мусора, только чистая производительность. By <b>Vektor010</b>.</i>
 </p>
 
@@ -25,7 +28,7 @@
 
 ## 🚀 Установка и Запуск
 
-1. Перейдите на вкладку **[Releases](../../releases/latest)** и скачайте архив `NOVA_Optimizer_v2.1.zip`.
+1. Перейдите на вкладку **[Releases](../../releases/latest)** и скачайте архив `NOVA_Optimizer_v3.0.zip`.
 2. Распакуйте архив в удобное место.
 3. Нажмите **Правой Кнопкой Мыши** по файлу `NOVA.ps1` ➔ **Выполнить с помощью PowerShell**.
 4. Скрипт мгновенно считает ваше железо (CPU, GPU, RAM) и откроет главное меню.
