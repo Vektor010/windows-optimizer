@@ -17,7 +17,7 @@ Write-Host ">>> Применение сетевых твиков, TCP/IP и оп
 Write-Host "[1/5] Настройка глобальных параметров TCP и алгоритма CUBIC..." -ForegroundColor Yellow
 try {
     netsh int tcp set global autotuninglevel=normal | Out-Null
-    netsh int tcp set global heuristics=disabled | Out-Null
+    netsh int tcp set global heuristics=default | Out-Null
     netsh int tcp set global rss=enabled | Out-Null
     netsh int tcp set global fastopen=enabled | Out-Null
     netsh int tcp set global timestamps=disabled | Out-Null
@@ -44,7 +44,7 @@ try {
 Write-Host "[2/5] Отключение модерации прерываний сетевой карты (нулевая задержка ITR)..." -ForegroundColor Yellow
 $adapters = Get-NetAdapter | Where-Object { $_.Status -eq "Up" }
 foreach ($adapter in $adapters) {
-    Set-NetAdapterAdvancedProperty -Name $adapter.Name -DisplayName "Interrupt Moderation" -DisplayValue "Disabled" -ErrorAction SilentlyContinue | Out-Null
+    Set-NetAdapterAdvancedProperty -Name $adapter.Name -DisplayName "Interrupt Moderation" -DisplayValue "Enabled" -ErrorAction SilentlyContinue | Out-Null
     Write-Host " [+] Адаптер '$($adapter.Name)': Модерация прерываний успешно отключена" -ForegroundColor Green
 }
 
@@ -62,9 +62,9 @@ if (-not (Test-Path $tcpParams)) { New-Item -Path $tcpParams -Force | Out-Null }
 Set-ItemProperty -Path $tcpParams -Name "DisableTaskOffload" -Type DWord -Value 0
 
 foreach ($adapter in $adapters) {
-    Set-NetAdapterAdvancedProperty -Name $adapter.Name -DisplayName "Receive Buffers" -DisplayValue "512" -ErrorAction SilentlyContinue | Out-Null
-    Set-NetAdapterAdvancedProperty -Name $adapter.Name -DisplayName "Transmit Buffers" -DisplayValue "128" -ErrorAction SilentlyContinue | Out-Null
-    Set-NetAdapterAdvancedProperty -Name $adapter.Name -DisplayName "Flow Control" -DisplayValue "Disabled" -ErrorAction SilentlyContinue | Out-Null
+    Set-NetAdapterAdvancedProperty -Name $adapter.Name -DisplayName "Receive Buffers" -DisplayValue "256" -ErrorAction SilentlyContinue | Out-Null
+    Set-NetAdapterAdvancedProperty -Name $adapter.Name -DisplayName "Transmit Buffers" -DisplayValue "256" -ErrorAction SilentlyContinue | Out-Null
+    Set-NetAdapterAdvancedProperty -Name $adapter.Name -DisplayName "Flow Control" -DisplayValue "Rx & Tx Enabled" -ErrorAction SilentlyContinue | Out-Null
     Write-Host " [+] Адаптер '$($adapter.Name)': Буферы RX/TX сконфигурированы, Flow Control отключен" -ForegroundColor Green
 }
 
