@@ -1,6 +1,6 @@
-<div align="center">
+﻿<div align="center">
 
-<img src="https://c.tenor.com/b9u2a8r1P2QAAAAC/cpu-processor.gif" width="100%" alt="Cyberpunk CPU Header">
+<img src="https://media.giphy.com/media/3o7TKrEzvLbgzGmM2Q/giphy.gif" width="100%" alt="Cyberpunk 60FPS Header">
 
 <br>
 
@@ -8,7 +8,7 @@
 
 # 🌌 Ультимативный Твикер для Киберспорта
 
-[![Windows 11](https://img.shields.io/badge/Windows_11-24H2%20%7C%2023H2-0078D4?logo=windows11&logoColor=white&style=for-the-badge)](https://microsoft.com/windows)
+[![Windows 11](https://img.shields.io/badge/Windows_11-26H2%20%7C%2025H2-0078D4?logo=windows11&logoColor=white&style=for-the-badge)](https://microsoft.com/windows)
 [![CPU](https://img.shields.io/badge/CPU-AMD_Ryzen_7_9850X3D-ED1C24?logo=amd&logoColor=white&style=for-the-badge)](#)
 [![GPU](https://img.shields.io/badge/GPU-RTX_5080_Ready-76B900?logo=nvidia&logoColor=white&style=for-the-badge)](#)
 [![Latency](https://img.shields.io/badge/DPC_Latency-%3C_1_ms-00FF00?style=for-the-badge)](#)
