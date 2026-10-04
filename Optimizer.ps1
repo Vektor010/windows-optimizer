@@ -1407,6 +1407,7 @@ while ($true) {
         "8"  { Menu-Security }
         "9"  { Menu-Visibility }
         "10" { Menu-Cleaner }
+        "11" { & (Join-Path $scriptsDir "Nuclear-Debloat.ps1"); if (-not $NonInteractive) { pause } }
         "A" {
             $snapDir = Join-Path (Join-Path $PSScriptRoot "backup") "snapshots"
             $latestFile = Join-Path $snapDir "LATEST.txt"
