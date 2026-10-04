@@ -1,23 +1,23 @@
 ﻿<div align="center">
 
-<img src="./assets/banner.gif" width="100%" alt="Cyberpunk 60FPS Header">
+<img src="./assets/banner.gif" width="100%" alt="Cyberpunk Purple Header">
 
 <br>
 
-<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=800&size=45&duration=3000&pause=1000&color=00FFFF&center=true&vCenter=true&width=800&lines=NOVA+CORE+OPTIMIZER+v3.0;DPC+LATENCY+%3C+1+MS;AMD+RYZEN+9850X3D+READY;ZERO+INPUT+LAG" alt="Typing SVG">
+<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=800&size=45&duration=3000&pause=1000&color=9D00FF&center=true&vCenter=true&width=800&lines=NOVA+CORE+OPTIMIZER+v3.0;DPC+LATENCY+%3C+1+MS;MAX+FPS+FOR+ALL+SYSTEMS;ZERO+INPUT+LAG" alt="Typing SVG">
 
 # 🌌 Ультимативный Твикер для Киберспорта
 
-[![Windows 11](https://img.shields.io/badge/Windows_11-26H2%20%7C%2025H2-0078D4?logo=windows11&logoColor=white&style=for-the-badge)](https://microsoft.com/windows)
-[![CPU](https://img.shields.io/badge/CPU-AMD_Ryzen_7_9850X3D-ED1C24?logo=amd&logoColor=white&style=for-the-badge)](#)
-[![GPU](https://img.shields.io/badge/GPU-RTX_5080_Ready-76B900?logo=nvidia&logoColor=white&style=for-the-badge)](#)
-[![Latency](https://img.shields.io/badge/DPC_Latency-%3C_1_ms-00FF00?style=for-the-badge)](#)
-[![AI Debloat](https://img.shields.io/badge/AI_Debloat-Copilot_Killed-FF0000?style=for-the-badge)](#)
+[![Windows 11](https://img.shields.io/badge/Windows_11-26H2%20%7C%2025H2-0078D4?logo=windows11&logoColor=white)](https://microsoft.com/windows)
+[![CPU](https://img.shields.io/badge/CPU-Intel_Core_%7C_AMD_Ryzen-ED1C24?logo=amd&logoColor=white)](#)
+[![GPU](https://img.shields.io/badge/GPU-NVIDIA_%7C_AMD_%7C_Intel-76B900?logo=nvidia&logoColor=white)](#)
+[![Latency](https://img.shields.io/badge/DPC_Latency-%3C_1_ms-00FF00)](#)
+[![AI Debloat](https://img.shields.io/badge/AI_Debloat-Copilot_Killed-FF0000)](#)
 
 <p align="center">
-  <b>Агрессивная, но на 100% безопасная оптимизация Windows 11 для соревновательного гейминга.</b><br>
+  <b>Агрессивная, но на 100% безопасная оптимизация Windows 11 для соревновательного гейминга на ЛЮБОМ железе.</b><br>
   Скрипт перехватывает контроль над ядром, вырезает ИИ (Copilot/Recall), убивает телеметрию и снижает задержку мыши до 1 мс.<br>
-  <i>Никакого мусора, только чистая производительность. By <b>Vektor010</b>.</i>
+  <i>Никакого мусора, только чистая производительность для всего мира. By <b>Vektor010</b>.</i>
 </p>
 
 [🚀 Скачать Релиз](#-установка-и-запуск) &bull; [✨ Технические детали](#-глубокая-техническая-информация) &bull; [🖥️ NOVA Console](#-интерфейс-nova-console) &bull; [🛡️ Откат](#-безопасность)
@@ -75,8 +75,8 @@ Windows 11 перегружена фоновыми процессами нейр
 ==============================================================================
         КОМПЛЕКСНЫЙ ПАКЕТ ОПТИМИЗАЦИИ (Gaming & System Optimizer)        
 ==============================================================================
- CPU: AMD Ryzen 7 9850X3D 8-Core Processor | GPU: NVIDIA GeForce RTX 5080
- RAM: 63 GB | Сеть: Ethernet
+ CPU: (Ваш Процессор) | GPU: (Ваша Видеокарта)
+ RAM: (Ваша ОЗУ) | Сеть: Ethernet
 ==============================================================================
  [1]   🖥️    Системные твики и ядро (System & Kernel: MMCSS, Quantum, Timer, DWM)
  [2]   🌐    Сетевые твики и TCP/IP (Network: Realtek, Nagle, Buffers, Coalescing)
@@ -106,6 +106,6 @@ Windows 11 перегружена фоновыми процессами нейр
 
 <div align="center">
   <br>
-  <i>Built for Speed. Built for Gamers.</i><br>
+  <i>Built for Speed. Built for Gamers. Worldwide.</i><br>
   <b>2026 © Vektor010</b>
 </div>
